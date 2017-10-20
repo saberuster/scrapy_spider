@@ -1,5 +1,5 @@
 import scrapy
-
+from scrapy_spider.items import FirstItem
 
 class FirstSpider(scrapy.Spider):
     name = "first"
@@ -15,6 +15,4 @@ class FirstSpider(scrapy.Spider):
 
     def parse(self, response):
         for name in response.css(".listbox1_text ul li::text"):
-            yield {
-                'name':name.extract().strip()
-            }
+            yield FirstItem(name=name.extract().strip())
